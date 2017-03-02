@@ -203,9 +203,9 @@ module CircleCi
       # @param project  [String] - Name of project
       # @param branch   [String] - Name of branch
       # @return         [CircleCi::Response] - Response object
-      def recent_builds_branch(username, project, branch)
+      def recent_builds_branch(username, project, branch, params = {})
         default_config.logger.warn('[Deprecated] Use instance method CircleCi::Project#recent_builds_branch instead')
-        new(username, project, default_config).recent_builds_branch(branch)
+        new(username, project, default_config).recent_builds_branch(branch, params)
       end
 
       ##
@@ -390,8 +390,8 @@ module CircleCi
     #
     # @param branch [String] - Name of branch
     # @return       [CircleCi::Response] - Response object
-    def recent_builds_branch(branch)
-      CircleCi.request(@conf, "/project/#{username}/#{project}/tree/#{branch}").get
+    def recent_builds_branch(branch, params)
+      CircleCi.request(@conf, "/project/#{username}/#{project}/tree/#{branch}", params).get
     end
 
     ##
